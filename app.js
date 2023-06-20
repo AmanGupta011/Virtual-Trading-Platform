@@ -7,8 +7,8 @@ const jwt = require("jsonwebtoken");
 
 const JWT_SECRET = "parwez";
 //const cookieParser = require("cookie-parser");
-const transport = require("../src/mailer/mailsend");
-var db = require("../src/database/db");
+const transport = require("./src/mailer/mailsend");
+var db = require("./src/database/db");
 // require("./auth");
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
@@ -39,9 +39,9 @@ const {
 } = require("console");
 
 //path set up
-const staticpath = path.join(__dirname, "../public");
-const partialpath = path.join(__dirname, "../templates/partials");
-const templatepath = path.join(__dirname, "../templates/views");
+const staticpath = path.join(__dirname, "./public");
+const partialpath = path.join(__dirname, "./templates/partials");
+const templatepath = path.join(__dirname, "./templates/views");
 app.set("view engine", "hbs");
 app.set("views", templatepath);
 app.use(express.json());
@@ -174,12 +174,12 @@ app.get("/congrats_message", (req, res) => {
 // forgot passwords
 //using router file
 // app.use("/api/projectauth", require("./router/projectauth"));
-app.use("/api/auth", require("./router/auth"));
-app.use("/api/registerauth", require("./router/registerauth"));
-app.use("/api/profileauth", require("./router/profileauth"));
-app.use("/api/showUserStocks", require("./router/showUserStocks"));
-app.use("/api/loginauth", require("./router/loginauth"));
-app.use("/api/sell", require("./router/sell"));
+// app.use("/api/auth", require("./router/auth"));
+app.use("/api/registerauth", require("./src/router/registerauth"));
+app.use("/api/profileauth", require("./src/router/profileauth"));
+app.use("/api/showUserStocks", require("./src/router/showUserStocks"));
+app.use("/api/loginauth", require("./src/router/loginauth"));
+app.use("/api/sell", require("./src/router/sell"));
 var request = require("request");
 app.get("/get_data", async (req, res) => {
   var url =
