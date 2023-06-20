@@ -61,7 +61,7 @@ app.use(
   })
 );
 app.use(flush());
-const port = 5050; //IF PROCESS.ENV NOT AVAILABLE THEN GOES ON 3000
+const port = process.env.PORT; //IF PROCESS.ENV NOT AVAILABLE THEN GOES ON 3000
 
 app.use(session({
   secret: "cats"
