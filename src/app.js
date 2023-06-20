@@ -9,7 +9,7 @@ const JWT_SECRET = "parwez";
 //const cookieParser = require("cookie-parser");
 const transport = require("../src/mailer/mailsend");
 var db = require("../src/database/db");
-require("./auth");
+// require("./auth");
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 var userkiId;
