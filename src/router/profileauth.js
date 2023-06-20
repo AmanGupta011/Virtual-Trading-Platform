@@ -80,5 +80,18 @@ router.get('/deleteAutoSell',(req,res)=>{
 })
 ////
 
+router.get("/logout",middlewares.verifyUser,async function (req, res, next) {
+  console.log("trying logout")
+  try{
+    res.clearCookie('access_token');
+    console.log("logout successfull")
+    res.render("landing");
+    // await req.user.save()
+  }
+  catch(error){
+    res.status(500).send("Some error logging out")
+  }
+});
+
 
 module.exports=router;

@@ -48,11 +48,11 @@ const getPriceNew = async (row) => {
     const index = "NIFTY 200";
     const response = await fetch(
       `https://latest-stock-price.p.rapidapi.com/price?Indices=${index}&Identifier=${row}`, {
-        headers: {
-          "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
-          "x-rapidapi-key": apiKey,
-        },
-      }
+      headers: {
+        "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    }
     );
 
     const data = await response.json();
@@ -63,7 +63,7 @@ const getPriceNew = async (row) => {
     //  res.status(500).send("Server Error");
   }
 };
-router.get("/showUserStocks", async (req, res) => {
+router.get("/showUserStocks", middlewares.verifyUser, async (req, res) => {
   try {
     const sql = `SELECT * FROM userStocks`;
     con.query(sql, async (error, result) => {
@@ -115,17 +115,17 @@ router.get("/showUserStocks", async (req, res) => {
   }
 });
 
-router.get("/stockSelect", async (req, res) => {
+router.get("/stockSelect", middlewares.verifyUser, async (req, res) => {
   try {
     const apiKey = "b50e47636emshec659faa495b4e4p163ca3jsna5ada859cc6e";
     const index = "NIFTY 200";
     const response = await fetch(
       `https://latest-stock-price.p.rapidapi.com/price?Indices=${index}`, {
-        headers: {
-          "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
-          "x-rapidapi-key": apiKey,
-        },
-      }
+      headers: {
+        "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    }
     );
 
     const data = await response.json();
@@ -159,7 +159,7 @@ router.get("/stockSelect", async (req, res) => {
   }
 });
 
-router.get("/buy", async (req, res) => {
+router.get("/buy", middlewares.verifyUser, async (req, res) => {
   try {
     const id = req.query.id;
     // console.log(id);
@@ -227,7 +227,7 @@ router.post("/post", middlewares.verifyUser, async (req, res) => {
         console.log(error);
       } else {
         console.log(result);
-        
+
         // console.log(result);
         let gg = crypt.decrypt(result[0].password);
         if (gg.localeCompare(password) == 0) {
@@ -327,7 +327,7 @@ router.post("/post", middlewares.verifyUser, async (req, res) => {
   }
 });
 
-router.get("/productDescription", async (req, res, next) => {
+router.get("/productDescription", middlewares.verifyUser, async (req, res, next) => {
   var message = req.query.error;
 
   ////////
@@ -369,8 +369,8 @@ router.get("/productDescription", async (req, res, next) => {
     perChange30d,
   };
 
-  var autoBuyIdentfier = identifier.substring(1,identifier.length-1);
-  console.log("autoBuyIdentfier"+autoBuyIdentfier);
+  var autoBuyIdentfier = identifier.substring(1, identifier.length - 1);
+  console.log("autoBuyIdentfier" + autoBuyIdentfier);
   // console.log(quote);
   //////////
   var symbol = quote.id + ".NS";
@@ -378,10 +378,10 @@ router.get("/productDescription", async (req, res, next) => {
   const today = new Date();
   const end = today.toISOString().slice(0, 10);
   const start = new Date(
-      today.getFullYear(),
-      today.getMonth() - 12,
-      today.getDate()
-    )
+    today.getFullYear(),
+    today.getMonth() - 12,
+    today.getDate()
+  )
     .toISOString()
     .slice(0, 10);
   const options = {
@@ -452,11 +452,11 @@ router.get("/stockHome", middlewares.verifyUser, async (req, res) => {
     const index = "NIFTY 200";
     const response = await fetch(
       `https://latest-stock-price.p.rapidapi.com/price?Indices=${index}`, {
-        headers: {
-          "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
-          "x-rapidapi-key": apiKey,
-        },
-      }
+      headers: {
+        "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    }
     );
 
     const data = await response.json();
@@ -491,17 +491,17 @@ router.get("/stockHome", middlewares.verifyUser, async (req, res) => {
 
 //most bought
 
-router.get("/mostBought", async (req, res, next) => {
+router.get("/mostBought",middlewares.verifyUser, async (req, res, next) => {
   try {
     const apiKey = "b50e47636emshec659faa495b4e4p163ca3jsna5ada859cc6e";
     const index = "NIFTY 200";
     const response = await fetch(
       `https://latest-stock-price.p.rapidapi.com/price?Indices=${index}`, {
-        headers: {
-          "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
-          "x-rapidapi-key": apiKey,
-        },
-      }
+      headers: {
+        "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    }
     );
 
     const data = await response.json();
@@ -535,17 +535,17 @@ router.get("/mostBought", async (req, res, next) => {
 
 // top gainers
 
-router.get("/topGainers", async (req, res, next) => {
+router.get("/topGainers",middlewares.verifyUser, async (req, res, next) => {
   try {
     const apiKey = "b50e47636emshec659faa495b4e4p163ca3jsna5ada859cc6e";
     const index = "NIFTY 200";
     const response = await fetch(
       `https://latest-stock-price.p.rapidapi.com/price?Indices=${index}`, {
-        headers: {
-          "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
-          "x-rapidapi-key": apiKey,
-        },
-      }
+      headers: {
+        "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    }
     );
 
     const data = await response.json();
@@ -577,17 +577,17 @@ router.get("/topGainers", async (req, res, next) => {
 
 // top losers
 
-router.get("/topLosers", async (req, res, next) => {
+router.get("/topLosers",middlewares.verifyUser, async (req, res, next) => {
   try {
     const apiKey = "b50e47636emshec659faa495b4e4p163ca3jsna5ada859cc6e";
     const index = "NIFTY 200";
     const response = await fetch(
       `https://latest-stock-price.p.rapidapi.com/price?Indices=${index}`, {
-        headers: {
-          "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
-          "x-rapidapi-key": apiKey,
-        },
-      }
+      headers: {
+        "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    }
     );
 
     const data = await response.json();
@@ -669,11 +669,11 @@ const getPriceNew1 = async (row) => {
     const index = "NIFTY 200";
     const response = await fetch(
       `https://latest-stock-price.p.rapidapi.com/price?Indices=${index}&Identifier=${row}`, {
-        headers: {
-          "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
-          "x-rapidapi-key": apiKey,
-        },
-      }
+      headers: {
+        "x-rapidapi-host": "latest-stock-price.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      },
+    }
     );
 
     const data = await response.json();

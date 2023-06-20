@@ -24,10 +24,12 @@ const bodyparser = require("body-parser");
 app.use(bodyparser.urlencoded({
   extended: true
 }));
-const dotenv = require("dotenv");
-dotenv.config({
-  path: ".env"
-});
+// const dotenv = require("dotenv");
+// dotenv.config({
+//   path: ".env"
+// });
+const dotenv = require('dotenv');
+let result = dotenv.config();
 const {
   constants
 } = require("buffer");
@@ -59,7 +61,7 @@ app.use(
   })
 );
 app.use(flush());
-const port = 80; //IF PROCESS.ENV NOT AVAILABLE THEN GOES ON 3000
+const port = 5050; //IF PROCESS.ENV NOT AVAILABLE THEN GOES ON 3000
 
 app.use(session({
   secret: "cats"
