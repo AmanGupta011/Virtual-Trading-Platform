@@ -95,6 +95,7 @@ router.post("/login", (req, res) => {
         // res.redirect("login");
         res.status(500).send(err)
         console.log("username password doesnot matched");
+        console.log(err)
         req.flash("message", err);
       } else {
         if (result[0]) {
