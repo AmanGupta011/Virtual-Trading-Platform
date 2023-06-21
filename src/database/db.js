@@ -18,8 +18,6 @@ var db = mysql.createConnection({
         console.log("connected to database");
       }
     });
-
-
-
+    
 module.exports=db;
 
